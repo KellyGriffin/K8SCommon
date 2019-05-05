@@ -1,0 +1,8 @@
+* Kubectl Install Instructions
+
+** Basic Install instructions per OS
+| Name                                 | Command                                                                          |
+|--------------------------------------+----------------------------------------------------------------------------------|
+| Linux           | =add here=                      |
+| MAC / OSx           | =add here=                                    |
+| Windows | =add windows here=|
