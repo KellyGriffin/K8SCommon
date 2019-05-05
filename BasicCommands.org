@@ -1,0 +1,72 @@
+** Pod
+| Name                             | Command                                                                                                                       |
+|----------------------------------+-------------------------------------------------------------------------------------------------------------------------------|
+| List all pods                    | =kubectl get pods=                                                                                                            |
+| List pods for all namespace      | =kubectl get pods -all-namespaces=                                                                                            |
+| List all critical pods           | =kubectl get -n kube-system pods -a=                                                                                          |
+| List pods with more informattion | =kubectl get pod -o wide=                                                               |
+| List pods and output to Yaml     | =kubectl get pod -o yaml = |
+| Get pod info                     | =kubectl describe pod/<pod name>=                                                                                       |
+| List all pods with labels        | =kubectl get pods --show-labels=                                                                                              |
+| List running pods                | =kubectl get pods --field-selector=status.phase=Running --all-namespaces                                                                       |
+| Watch pods                       | =kubectl get pods  -n <namespace> --watch=                                                                                      |
+| List pods and containers         | =kubectl get pods --all-namespaces -o='custom-columns=PODS:.metadata.name,CONTAINERS:.spec.containers[*].name'                                  |
+| List pods, containers and images | =kubectl get pods --all-namespaces -o='custom-columns=PODS:.metadata.name,CONTAINERS:.spec.containers[*].name,Images:.spec.containers[*].image' |
+| Scale out Deployment             | =kubectl scale --replicas=3 ds <name>=                        |
+
+** Resources Deletion
+| Name                                    | Command                                                  |
+|-----------------------------------------+----------------------------------------------------------|
+| Delete pod                              | =kubectl delete pod/<pod-name> -n <my-namespace>=        |
+| Delete by file                          | =kubectl delete -f <nameofyaml>.yaml=
+| Delete pod by force                     | =kubectl delete pod/<pod-name> --grace-period=0 --force= |
+| Delete pods by labels                   | =kubectl delete pod -l <key>=<label>=                         |
+| Delete deployments by labels            | =kubectl delete deployment -l <key>=<label>=             |
+| Delete all resources filtered by labels | =kubectl delete pods,services -l <key>=<label>=           |
+| Delete resources under a namespace      | =kubectl -n <namespace> delete po,svc --all=                   |
+
+** Service
+| Name                            | Command                                                                           |
+|---------------------------------+-----------------------------------------------------------------------------------|
+| List all services               | =kubectl get services --all-namespaces=                                                            |
+| List service endpoints          | =kubectl get endpoints --all-namespaces=                                                           |
+| Get service detail in YAML      | =kubectl get service <servicename> -n <namespace> -o yaml=                                       |
+| Get service cluster ip          | =kubectl get service <servicename> -n <namespace> -o go-template='{{.spec.clusterIP}}'            |
+| Get service cluster port        | =kubectl get service <servicename> -n <namespace> -o go-template='{{(index .spec.ports 0).port}}' |
+
+** Events & Metrics
+| Name                            | Command                                                    |
+|---------------------------------+------------------------------------------------------------|
+| View all events                 | =kubectl get events --all-namespaces=                      |
+| List Events sorted by timestamp | =kubectl get events --sort-by=.metadata.creationTimestamp   |
+
+** Namespace & Security
+| Name                          | Command                                                                         |
+|-------------------------------+---------------------------------------------------------------------------------|
+| List authenticated contexts   | =kubectl config get-contexts=                                 |
+| Load context from config file | =kubectl get cs --kubeconfig <kubeconfig file>.yml=                                   |
+| Switch context                | =kubectl config use-context <cluster-name>=                                     |
+| Delete the specified context  | =kubectl config delete-context <cluster-name>=                                  |
+| List all namespaces defined   | =kubectl get namespaces=                                                        |
+| Set namespace preference      | =kubectl config set-context $(kubectl config current-context) --namespace=<ns1>= |
+| List certificates             | =kubectl get csr --all-namespaces=                                                               |
+
+** Common Commands
+| Name                                 | Command                                                                          |
+|--------------------------------------+----------------------------------------------------------------------------------|
+| Run curl test temporarily            | =kubectl run --rm mytest --image=yauritux/busybox-curl -it=                      |
+| Run wget test temporarily            | =kubectl run --rm mytest --image=busybox -it=                                    |
+| Run nginx deployment with 2 replicas | =kubectl run my-nginx --image=nginx --replicas=2 --port=80=                      |
+| Set namespace preference             | =kubectl config set-context $(kubectl config current-context) --namespace=<ns1>= |
+| List everything                      | =kubectl get all --all-namespaces=                                               |
+| Get all services                     | =kubectl get service --all-namespaces=                                           |
+| Show nodes with labels               | =kubectl get nodes --show-labels=                                                |
+| Validate yaml file with dry run      | =kubectl create --dry-run --validate -f <YAML File>=                          |
+| Start a temporary pod for testing    | =kubectl run --rm -i -t --image=alpine test-$RANDOM -- sh=                       |
+| kubectl run shell command            | =kubectl exec -it <podname> -- ls -l /etc/hosts=                                    |
+| Get system conf via configmap        | =kubectl -n kube-system get cm kubeadm-config -o yaml=                           |
+| Get deployment yaml                  | =kubectl -n <namespace> get deployment <deploymentname> -o yaml=                         |
+| Explain resource                     | =kubectl explain <resource>=                                    |
+| Open a bash terminal in a pod        | =kubectl exec -it <pod> -n <namespace> sh=                                                    |
+| Check pod environment variables      | =kubectl exec <pod> -n <namespace> env=                                            |
+| Get pods sorted by restart count     | =kubectl get pods --sort-by='.status.containerStatuses[0].restartCount' --all-namespaces     =      |
