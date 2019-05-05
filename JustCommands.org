@@ -1,7 +1,4 @@
 * Kubectl Kubernetes CheatSheet                                   :Cloud:
-:PROPERTIES:
-:type:     kubernetes
-:END:
 
 ** Common Commands
 | Name                                 | Command                                                                          |
@@ -66,7 +63,7 @@
 | log in master node        | =/var/log/kube-apiserver.log=, =kube-scheduler.log=, =kube-controller-manager.log= |
 | log in worker node        | =/var/log/kubelet.log=, =kubelet-proxy.log=                                        |
 | Env                       | =/etc/systemd/system/kubelet.service.d/10-kubeadm.conf=                            |
-| Env                       | export KUBECONFIG=/etc/kubernetes/admin.conf                                       |
+| Env                       | =export KUBECONFIG=/etc/kubernetes/admin.conf                                       |
 
 ** Pod
 | Name                             | Command                                                                                                                       |
@@ -77,14 +74,13 @@
 | List pods with more info         | =kubectl get pod -o wide=, =kubectl get pod/<pod-name> -o yaml=                                                               |
 | Get pod info                     | =kubectl describe pod/srv-mysql-server=                                                                                       |
 | List all pods with labels        | =kubectl get pods --show-labels=                                                                                              |
-| List running pods                | kubectl get pods --field-selector=status.phase=Running                                                                        |
+| List running pods                | =kubectl get pods --field-selector=status.phase=Running                                                                        |
 | Get Pod initContainer status     | =kubectl get pod --template '{{.status.initContainerStatuses}}' <pod-name>=                                                   |
-| kubectl run command              | kubectl exec -it -n "$ns" "$podname" -- sh -c "echo $msg >>/dev/err.log"                                                      |
+| kubectl run command              | =kubectl exec -it -n "$ns" "$podname" -- sh -c "echo $msg >>/dev/err.log"  =                                                    |
 | Watch pods                       | =kubectl get pods  -n wordpress --watch=                                                                                      |
-| Get pod by selector              | podname=$(kubectl get pods -n $namespace --selector="app=syslog" -o jsonpath='{.items[*].metadata.name}')                     |
-| List pods and containers         | kubectl get pods -o='custom-columns=PODS:.metadata.name,CONTAINERS:.spec.containers[*].name'                                  |
-| List pods, containers and images | kubectl get pods -o='custom-columns=PODS:.metadata.name,CONTAINERS:.spec.containers[*].name,Images:.spec.containers[*].image' |
-| Kubernetes Yaml Examples         | [[https://cheatsheet.dennyzhang.com/kubernetes-yaml-templates][Link: kubernetes yaml templates]]                                                                                               |
+| Get pod by selector              | =podname=$(kubectl get pods -n $namespace --selector="app=syslog" -o jsonpath='{.items[*].metadata.name}')                     |
+| List pods and containers         | =kubectl get pods -o='custom-columns=PODS:.metadata.name,CONTAINERS:.spec.containers[*].name'                                  |
+| List pods, containers and images | =kubectl get pods -o='custom-columns=PODS:.metadata.name,CONTAINERS:.spec.containers[*].name,Images:.spec.containers[*].image' |
 
 ** Label & Annontation
 | Name                             | Command                                                           |
@@ -105,7 +101,6 @@
 | Check update history         | =kubectl rollout history deployment/nginx-app=                           |
 | Pause/Resume                 | =kubectl rollout pause deployment/nginx-deployment=, =resume=            |
 | Rollback to previous version | =kubectl rollout undo deployment/nginx-deployment=                       |
-| Kubernetes Yaml Examples     | [[https://cheatsheet.dennyzhang.com/kubernetes-yaml-templates][Link: kubernetes yaml templates]], [[https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#pausing-and-resuming-a-deployment][Link: Pausing and Resuming a Deployment]] |
 
 ** Quota & Limits & Resource
 | Name                          | Command                                                                          |
@@ -114,7 +109,6 @@
 | List Resource Quota           | =kubectl get resourcequota=                                                      |
 | List Limit Range              | =kubectl get limitrange=                                                         |
 | Customize resource definition | =kubectl set resources deployment nginx -c=nginx --limits=cpu=200m,memory=512Mi= |
-| Kubernetes Yaml Examples      | [[https://cheatsheet.dennyzhang.com/kubernetes-yaml-templates][Link: kubernetes yaml templates]]                                                  |
 
 ** Service
 | Name                            | Command                                                                           |
@@ -122,11 +116,10 @@
 | List all services               | =kubectl get services=                                                            |
 | List service endpoints          | =kubectl get endpoints=                                                           |
 | Get service detail              | =kubectl get service nginx-service -o yaml=                                       |
-| Get service cluster ip          | kubectl get service nginx-service -o go-template='{{.spec.clusterIP}}'            |
-| Get service cluster port        | kubectl get service nginx-service -o go-template='{{(index .spec.ports 0).port}}' |
+| Get service cluster ip          | =kubectl get service nginx-service -o go-template='{{.spec.clusterIP}}'            |
+| Get service cluster port        | =kubectl get service nginx-service -o go-template='{{(index .spec.ports 0).port}}' |
 | Expose deployment as lb service | =kubectl expose deployment/my-app --type=LoadBalancer --name=my-service=          |
 | Expose service as lb service    | =kubectl expose service/wordpress-1-svc --type=LoadBalancer --name=wordpress-lb=  |
-| Kubernetes Yaml Examples        | [[https://cheatsheet.dennyzhang.com/kubernetes-yaml-templates][Link: kubernetes yaml templates]]                                                   |
 
 ** Secrets
 | Name                        | Command                                                                 |
@@ -134,7 +127,6 @@
 | List secrets                | =kubectl get secrets --all-namespaces=                                  |
 | Create secret from cfg file | =kubectl create secret generic db-user-pass --from-file=./username.txt= |
 | Generate secret             | =echo -n 'mypasswd'=, then redirect to =base64 -decode=                 |
-| Kubernetes Yaml Examples    | [[https://cheatsheet.dennyzhang.com/kubernetes-yaml-templates][Link: kubernetes yaml templates]]                                         |
 
 ** StatefulSet
 | Name                               | Command                                                  |
@@ -142,7 +134,6 @@
 | List statefulset                   | =kubectl get sts=                                        |
 | Delete statefulset only (not pods) | =kubectl delete sts/<stateful_set_name> --cascade=false= |
 | Scale statefulset                  | =kubectl scale sts/<stateful_set_name> --replicas=5=     |
-| Kubernetes Yaml Examples           | [[https://cheatsheet.dennyzhang.com/kubernetes-yaml-templates][Link: kubernetes yaml templates]]                          |
 
 ** Volumes & Volume Claims
 | Name                      | Command                                                      |
@@ -152,7 +143,6 @@
 | Check persist volume      | =kubectl describe pv/pv0001=                                 |
 | Copy local file to pod    | =kubectl cp /tmp/my <some-namespace>/<some-pod>:/tmp/server= |
 | Copy pod file to local    | =kubectl cp <some-namespace>/<some-pod>:/tmp/server /tmp/my= |
-| Kubernetes Yaml Examples  | [[https://cheatsheet.dennyzhang.com/kubernetes-yaml-templates][Link: kubernetes yaml templates]]                              |
 
 ** Events & Metrics
 | Name                            | Command                                                    |
@@ -177,7 +167,6 @@
 | List all namespaces defined   | =kubectl get namespaces=                                                        |
 | Set namespace preference      | =kubectl config set-context $(kubectl config current-context) --namespace=<ns1>= |
 | List certificates             | =kubectl get csr=                                                               |
-| Kubernetes Yaml Examples      | [[https://cheatsheet.dennyzhang.com/kubernetes-yaml-templates][Link: kubernetes yaml templates]]                                                 |
 
 ** Network
 | Name                              | Command                                                  |
