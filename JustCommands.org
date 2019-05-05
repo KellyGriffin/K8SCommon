@@ -24,9 +24,9 @@
 | Enable kubectl shell autocompletion  | =echo "source <(kubectl completion bash)" >>~/.bashrc=, and reload               |
 | Use minikube dockerd in your laptop  | =eval $(minikube docker-env)=, No need to push docker hub any more               |
 | Kubectl apply a folder of yaml files | =kubectl apply -R -f .=                                                          |
-| Get services sorted by name          | =kubectl get services --sort-by=.metadata.name                                    |
-| Get pods sorted by restart count     | =kubectl get pods --sort-by='.status.containerStatuses[0].restartCount'           |
-| List all container images            | =kubectl get pods --all-namespaces -o jsonpath="{..image}" | tr -s '[[:space:]]' '\n'| sort | uniq -d |
+| Get services sorted by name          | =kubectl get services --sort-by=.metadata.name                               =     |
+| Get pods sorted by restart count     | =kubectl get pods --sort-by='.status.containerStatuses[0].restartCount'     =      |
+| List all container images            | =kubectl get pods --all-namespaces -o jsonpath="{..image}" | tr -s '[[:space:]]' '\n'| sort | uniq -d =|
 
 ** Check Performance
 | Name                                         | Command                                              |
@@ -63,7 +63,7 @@
 | log in master node        | =/var/log/kube-apiserver.log=, =kube-scheduler.log=, =kube-controller-manager.log= |
 | log in worker node        | =/var/log/kubelet.log=, =kubelet-proxy.log=                                        |
 | Env                       | =/etc/systemd/system/kubelet.service.d/10-kubeadm.conf=                            |
-| Env                       | =export KUBECONFIG=/etc/kubernetes/admin.conf                                       |
+| Env                       | =export KUBECONFIG=/etc/kubernetes/admin.conf                               =        |
 
 ** Pod
 | Name                             | Command                                                                                                                       |
