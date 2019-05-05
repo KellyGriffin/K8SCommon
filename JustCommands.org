@@ -26,7 +26,7 @@
 | Kubectl apply a folder of yaml files | =kubectl apply -R -f .=                                                          |
 | Get services sorted by name          | =kubectl get services --sort-by=.metadata.name                               =     |
 | Get pods sorted by restart count     | =kubectl get pods --sort-by='.status.containerStatuses[0].restartCount'     =      |
-| List all container images            | =kubectl get pods --all-namespaces -o jsonpath="{..image}" | tr -s '[[:space:]]' '\n'| sort | uniq -d =|
+| List all container images            | kubectl get pods --all-namespaces -o jsonpath="{..image}" | tr -s '[[:space:]]' '\n'| sort | uniq -d |
 
 ** Check Performance
 | Name                                         | Command                                              |
@@ -78,7 +78,7 @@
 | Get Pod initContainer status     | =kubectl get pod --template '{{.status.initContainerStatuses}}' <pod-name>=                                                   |
 | kubectl run command              | =kubectl exec -it -n "$ns" "$podname" -- sh -c "echo $msg >>/dev/err.log"  =                                                    |
 | Watch pods                       | =kubectl get pods  -n wordpress --watch=                                                                                      |
-| Get pod by selector              | =podname=$(kubectl get pods -n $namespace --selector="app=syslog" -o jsonpath='{.items[*].metadata.name}')                     |
+| Get pod by selector              | podname=$(kubectl get pods --all-namespaces -o jsonpath='{.items[*].metadata.name}')                     |
 | List pods and containers         | =kubectl get pods -o='custom-columns=PODS:.metadata.name,CONTAINERS:.spec.containers[*].name'                                  |
 | List pods, containers and images | =kubectl get pods -o='custom-columns=PODS:.metadata.name,CONTAINERS:.spec.containers[*].name,Images:.spec.containers[*].image' |
 
