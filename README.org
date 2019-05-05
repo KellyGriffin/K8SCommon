@@ -781,9 +781,9 @@ Denny Zhang (Github . Blogger) [8:35 AM]
 I don't think so
 #+END_EXAMPLE
 *** TODO How Does NodePort work behind the scene?
-*** #  --8<-------------------------- separator ------------------------>8-- :noexport:
+*** #  --8<-------------------------- separator ------------------------>8-- 
 *** TODO How Loadbalancer is implemented in code?
-*** #  --8<-------------------------- separator ------------------------>8-- :noexport:
+*** #  --8<-------------------------- separator ------------------------>8-- 
 *** TODO Does Loadbalancer works only for public cloud?
 *** TODO How I configure Ingress?
 ** TODO [#A] NodePort VS clusterIP                                 :IMPORTANT:
@@ -908,7 +908,7 @@ https://stackoverflow.com/questions/33415913/whats-the-best-way-to-share-mount-o
 https://www.linkedin.com/feed/update/urn:li:activity:6355445509146107904/
 ** TODO K8S label & Selector
 https://github.com/dennyzhang/dennytest/tree/master/cheatsheet-kubernetes-A4][challenges-leetcode-interesting]]
-* [#A] k8s metric server                                 :noexport:IMPORTANT:
+* [#A] k8s metric server                                 IMPORTANT:
 Metrics Server is a cluster-wide aggregator of resource usage data.
 
 Metrics Server registered in the main API server through Kubernetes aggregator.
@@ -947,14 +947,14 @@ It also provides REST endpoints to gather those metrics. The metrics are constra
 Heapster queries the kubelet for its data.
 
 Today, heapster is the source of the time-series data for the Kubernetes Dashboard.
-** #  --8<-------------------------- separator ------------------------>8-- :noexport:
+** #  --8<-------------------------- separator ------------------------>8-- 
 ** TODO How to query metric server
 ** TODO Key scenarios of metric server
 The metrics-server will provide a much needed official API for the internal components of Kubernetes to make decisions about the utilization and performance of the cluster.
 
 - HPA(Horizontal Pod Autoscaler) need input to do good auto-scaling
 ** TODO There are plans for an "Infrastore", a Kubernetes component that keeps historical data and events
-** #  --8<-------------------------- separator ------------------------>8-- :noexport:
+** #  --8<-------------------------- separator ------------------------>8-- 
 ** TODO why from heapster to k8s metric server?
 ** TODO kube-aggregator
 ** TODO what is promethues format?
@@ -985,7 +985,7 @@ Scheduler: In the future Core Metrics will be considered in order to schedule be
 https://blog.freshtracks.io/what-is-the-the-new-kubernetes-metrics-server-849c16aa01f4
 https://blog.outlyer.com/monitoring-kubernetes-with-heapster-and-prometheus
 https://www.outcoldman.com/en/archive/2017/07/09/kubernetes-monitoring-resources/
-* k8s loadbalancer                                                 :noexport:
+* k8s loadbalancer                                                 
 ** DONE k8s service: loadbalancer
    CLOSED: [2018-06-19 Tue 13:51]
 #+BEGIN_EXAMPLE
@@ -1004,7 +1004,7 @@ https://www.outcoldman.com/en/archive/2017/07/09/kubernetes-monitoring-resources
    type: LoadBalancer
  EOF
 #+END_EXAMPLE
-* k8s DaemonSet                                                    :noexport:
+* k8s DaemonSet                                                    
 ** DONE k8s daemonsets: ensures that all (or some) Nodes run a copy of a Pod.
    CLOSED: [2018-06-19 Tue 13:28]
  https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/
@@ -1016,10 +1016,10 @@ https://www.outcoldman.com/en/archive/2017/07/09/kubernetes-monitoring-resources
  - running a cluster storage daemon, such as glusterd, ceph, on each node.
  - running a logs collection daemon on every node, such as fluentd or logstash.
    - running a node monitoring daemon on every node, such as Prometheus Node Exporter, collectd, Datadog agent, New Relic agent, or Ganglia gmond.
-* [#A] etcd                                                        :noexport:
+* [#A] etcd                                                        
 https://coreos.com/etcd/docs/latest/dev-guide/interacting_v3.html
 https://coreos.com/etcd/docs/latest/v2/README.html
-* [#B] k8s addons                                                  :noexport:
+* [#B] k8s addons                                                  
 https://kubernetes.io/docs/concepts/cluster-administration/addons/
 ** DONE k8s install add-on: dashboard
   CLOSED: [2018-01-03 Wed 12:19]
@@ -1067,7 +1067,7 @@ https://blog.frognew.com/2017/09/kubeadm-install-kubernetes-1.8.html#8dashboard%
   CLOSED: [2018-01-03 Wed 12:12]
 https://github.com/kubernetes/kubectl/issues/142
 kubectl proxy --port=8001 --address=0.0.0.0
-* [#A] k8s volumes                                                 :noexport:
+* [#A] k8s volumes                                                 
   CLOSED: [2017-12-01 Fri 22:45]
 https://kubernetes.io/docs/concepts/storage/volumes
 https://kubernetes.io/docs/tasks/configure-pod-container/configure-volume-storage/
@@ -1099,7 +1099,7 @@ The access modes are:
 ReadWriteOnce - the volume can be mounted as read-write by a single node
 ReadOnlyMany - the volume can be mounted read-only by many nodes
 ReadWriteMany - the volume can be mounted as read-write by many nodes
-* [#B] k8s security: secrets, authentication & authorization       :noexport:
+* [#B] k8s security: secrets, authentication & authorization       
 ** what's service account: In contrast, service accounts are users managed by the Kubernetes API.
 https://kubernetes.io/docs/admin/authentication/
 https://github.com/kubernetes/kubernetes/blob/master/examples/elasticsearch/service-account.yaml
@@ -1159,20 +1159,20 @@ spec:
             key: password
   restartPolicy: Never
 #+END_EXAMPLE
-* HPA: Horizontal Pod Autoscaler                                   :noexport:
-* Uncertainty & Uncomfortable things with K8S                      :noexport:
+* HPA: Horizontal Pod Autoscaler                                   
+* Uncertainty & Uncomfortable things with K8S                      
 ** Destroy namepsace takes more than 15 minutes, with nowhere to check
 Testing in minikube
 ** Pod stucks in containercreating for a long time
-* HALF kubectl apply to a list of folder: kubectl apply -R -f namespace-drain-manifests/manifests :noexport:
-* GKE user access                                                  :noexport:
+* HALF kubectl apply to a list of folder: kubectl apply -R -f namespace-drain-manifests/manifests 
+* GKE user access                                                  
 #+BEGIN_EXAMPLE
 If y'all run into the following error: `is forbidden: attempt to grant extra privileges:` when trying to run `kubectl apply -R -f ~/workspace/namespace-drain/manifests/` against a GKE cluster, then run the following command.
 
 ```kubectl create clusterrolebinding cluster-admin-binding --clusterrole cluster-admin --user $(gcloud config get-value account)```
 #+END_EXAMPLE
-* Blog: How Enterprise Do XXX in Container world?                  :noexport:
-* TODO [#A] Blog: interview candidates for k8s experience          :noexport:
+* Blog: How Enterprise Do XXX in Container world?                  
+* TODO [#A] Blog: interview candidates for k8s experience          
 ** Explain concepts
 *** What's k8s context. Why we need it?
 *** What's initContainer? Why we need it?
@@ -1200,12 +1200,12 @@ https://vsupalov.com/kubernetes-labels-annotations-difference/ (edited)
 *** layer of yaml
 *** ABBA on volumes
 *** apply one configmap to all namespace
-* k8s workflow: every 3 months has one new release                 :noexport:
+* k8s workflow: every 3 months has one new release                 
 https://github.com/kubernetes/kubeadm/blob/master/docs/release-cycle.md
-* Blog: Kubernetes Limitation List                                 :noexport:
+* Blog: Kubernetes Limitation List                                 
 - Starting with Kubernetes 1.6 we support 5000 nodes clusters with 30 pods per node. ([[https://github.com/kubernetes/community/blob/master/contributors/design-proposals/instrumentation/metrics-server.md#scalability-limitations][link]])
-* #  --8<-------------------------- separator ------------------------>8-- :noexport:
-* DONE Why we need Static Pods                                     :noexport:
+* #  --8<-------------------------- separator ------------------------>8-- 
+* DONE Why we need Static Pods                                     
   CLOSED: [2019-01-04 Fri 15:04]
 https://kubernetes.io/docs/tasks/administer-cluster/static-pod/
 Denny Zhang [2:26 PM]
@@ -1240,11 +1240,11 @@ Fan Zhang [3:03 PM]
 
 Denny Zhang [3:04 PM]
 所以drain node不会把static pod删掉？
-* TODO Why need kubernetes/apiserver: https://github.com/kubernetes/apiserver :noexport:
+* TODO Why need kubernetes/apiserver: https://github.com/kubernetes/apiserver 
 Library for writing a Kubernetes-style API server.
 
 https://github.com/kubernetes/kube-aggregator
-* TODO [#A] Questions                                              :noexport:
+* TODO [#A] Questions                                              
 ** pod type
 https://kubernetes.io/docs/tasks/debug-application-cluster/debug-application/#my-service-is-missing-endpoints
 #+BEGIN_EXAMPLE
@@ -1275,13 +1275,13 @@ $ kubectl logs --previous ${POD_NAME} ${CONTAINER_NAME}
 #+END_EXAMPLE
 ** Why k8s dashboard get deprecated?
 https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
-* TODO k8s architecture                                            :noexport:
+* TODO k8s architecture                                            
 https://www.youtube.com/watch?v=_WfJz5VS_cU&list=PLj6h78yzYM2NGwRwkBPxigKio2r0XHPl9
-* TODO k8s scenario problems                                       :noexport:
+* TODO k8s scenario problems                                       
 ** TODO export k8s dashboard: kube proxy VS ingress
 ** TODO how to back and restore etcd
 https://kubernetes-incubator.github.io/kube-aws/advanced-topics/etcd-backup-and-restore.html
-* TODO Apply yamls file recursively                                :noexport:
+* TODO Apply yamls file recursively                                
 #+BEGIN_SRC sh
 # create
 time ls -1 */*.yml | grep -v namespace | xargs -I{} kubectl apply -f {}
@@ -1289,21 +1289,21 @@ time ls -1 */*.yml | grep -v namespace | xargs -I{} kubectl apply -f {}
 # delete
 time ls -1r */*.yml | grep -v namespace | xargs -I{} kubectl delete -f {}
 #+END_SRC
-* TODO devstats: https://k8s.devstats.cncf.io/d/12/dashboards?refresh=15m&orgId=1 :noexport:
-* TODO create a ingress service for clusterip service              :noexport:
-* TODO kubectl -vvv                                                :noexport:
-* TODO kubectl get application --all-namespaces                    :noexport:
-* TODO kubectl delete namespace in GKE is extremely slow           :noexport:
-* TODO try more with ReplicaSet                                    :noexport:
-* TODO try PodDisruptionBudget: https://hackernoon.com/top-10-kubernetes-tips-and-tricks-27528c2d0222 :noexport:
-* TODO [#A] k8s services                                           :noexport:
+* TODO devstats: https://k8s.devstats.cncf.io/d/12/dashboards?refresh=15m&orgId=1 
+* TODO create a ingress service for clusterip service              
+* TODO kubectl -vvv                                                
+* TODO kubectl get application --all-namespaces                    
+* TODO kubectl delete namespace in GKE is extremely slow           
+* TODO try more with ReplicaSet                                    
+* TODO try PodDisruptionBudget: https://hackernoon.com/top-10-kubernetes-tips-and-tricks-27528c2d0222 
+* TODO [#A] k8s services                                           
 https://medium.com/google-cloud/kubernetes-nodeport-vs-loadbalancer-vs-ingress-when-should-i-use-what-922f010849e0
-* [#A] ClusterIP                                                   :noexport:
+* [#A] ClusterIP                                                   
 ** TODO kubernetes clusterip
 ** TODO Is k8s ClusterIP SPOF?
  https://mp.weixin.qq.com/s?__biz=MzIzNjUxMzk2NQ==&mid=2247486025&idx=1&sn=1f95917918a3217bb92b97113c81b6c8&chksm=e8d7f58bdfa07c9dedbfbe4f39687ea5d467ec371ecb2dea5dd13101a46d3bb754d6738e481f&scene=27#wechat_redirect
 ** TODO Use ExternalName to avoid ClusterIP SPOF
-* TODO k8s cpu 88m?                                                :noexport:
+* TODO k8s cpu 88m?                                                
 #+BEGIN_EXAMPLE
     Limits:
       cpu:	48m
@@ -1313,34 +1313,34 @@ https://medium.com/google-cloud/kubernetes-nodeport-vs-loadbalancer-vs-ingress-w
       memory:		104Mi
 
 #+END_EXAMPLE
-* TODO autoscaling pod: try auto scaling                           :noexport:
-* TODO k8s volume: readwriteonce, readwritemany?                   :noexport:
-* #  --8<-------------------------- separator ------------------------>8-- :noexport:
-* TODO grant more privileges to a given serviceaccount             :noexport:
+* TODO autoscaling pod: try auto scaling                           
+* TODO k8s volume: readwriteonce, readwritemany?                   
+* #  --8<-------------------------- separator ------------------------>8-- 
+* TODO grant more privileges to a given serviceaccount             
 kubectl get serviceaccount --all-namespaces
 
 prometheus-1-prometheusserviceaccount-e1fd
 
 system:kubelet-api-admin
-* TODO Question: PodDisruptionBudget: https://docs.pivotal.io/runtimes/pks/1-2/troubleshoot-issues.html#upgrade-drain-hangs :noexport:
+* TODO Question: PodDisruptionBudget: https://docs.pivotal.io/runtimes/pks/1-2/troubleshoot-issues.html#upgrade-drain-hangs 
 If Kubernetes is unable to unschedule a pod, then the drain hangs indefinitely. 
 
 One reason why Kubernetes may be unable to unschedule the node is if
 the PodDisruptionBudget object has been configured in a way that
 allows 0 disruptions and only a single instance of the pod has been
 scheduled.
-* TODO k8s events                                                  :noexport:
+* TODO k8s events                                                  
 https://solinea.com/blog/tapping-kubernetes-events
-* TODO kubectl from worker vm, I don't seem to need a kubeconfig   :noexport:
-* TODO kubectl apply -f -                                          :noexport:
-* TODO How does "kubectl delete - f -" works?                      :noexport:
-* TODO devstats: https://k8s.devstats.cncf.io/d/12/dashboards?refresh=15m&orgId=1 :noexport:
-* TODO Is it possible to assign a DNS address to Kubernetes service :noexport:
-* TODO k8s template templateinstance                               :noexport:
-* TODO [#A] k8s yaml create a loadbalancer                         :noexport:
-* TODO github improvememnt: update k8s cheatsheet: https://blog.billyc.io/notes/kubectl-notes/ :noexport:
+* TODO kubectl from worker vm, I don't seem to need a kubeconfig   
+* TODO kubectl apply -f -                                          
+* TODO How does "kubectl delete - f -" works?                      
+* TODO devstats: https://k8s.devstats.cncf.io/d/12/dashboards?refresh=15m&orgId=1 
+* TODO Is it possible to assign a DNS address to Kubernetes service 
+* TODO k8s template templateinstance                               
+* TODO [#A] k8s yaml create a loadbalancer                         
+* TODO github improvememnt: update k8s cheatsheet: https://blog.billyc.io/notes/kubectl-notes/ 
 https://kubernetes.io/docs/reference/kubectl/cheatsheet/
-* [#A] Google Kubernetes                                 :noexport:IMPORTANT:
+* [#A] Google Kubernetes                                 IMPORTANT:
 No.2 Kubernetes
 
 Kubernetes是一个编排（orchestration）工具,类似运行于Apache Mesos之上的Marathon,但是它是专门为Docker容器而创建的.
@@ -1530,8 +1530,8 @@ Kubernetes - Local Testing
 https://www.youtube.com/watch?v=R-3dfURb2hA
 The Illustrated Children's Guide to Kubernetes
 
-* TODO [#A] Run a task on every node in a cluster                  :noexport:
-* TODO kubectl get all won't get psp                               :noexport:
+* TODO [#A] Run a task on every node in a cluster                  
+* TODO kubectl get all won't get psp                               
 #+BEGIN_EXAMPLE
 root@009069ee-95d5-49a2-6b82-67aff8eb6737:/tmp/build/4ecf0f02# kubectl get all --all-namespaces
 NAMESPACE                   NAME                                        READY     STATUS    RESTARTS   AGE
@@ -1574,34 +1574,34 @@ NAME              PRIV      CAPS      SELINUX    RUNASUSER   FSGROUP    SUPGROUP
 kube-system-psp   false     *         RunAsAny   RunAsAny    RunAsAny   RunAsAny   false            configMap,emptyDir,projected,secret,downwardAPI
 root@009069ee-95d5-49a2-6b82-67aff8eb6737:/tmp/build/4ecf0f02# kubectl get all --all-namespaces | grep kube-system-psp
 #+END_EXAMPLE
-* TODO where is k8s job log?                                       :noexport:
+* TODO where is k8s job log?                                       
 http://kubernetesbyexample.com/jobs/
-* #  --8<-------------------------- separator ------------------------>8-- :noexport:
-* TODO kubectl logs --previous nginx-app-zibvs                     :noexport:
+* #  --8<-------------------------- separator ------------------------>8-- 
+* TODO kubectl logs --previous nginx-app-zibvs                     
 https://jimmysong.io/cheatsheets/kubernetes-kubectl
-* #  --8<-------------------------- separator ------------------------>8-- :noexport:
-* TODO [#A] play with k8s ingress service                          :noexport:
-* TODO Vanilla CNCF Certified Kubernetes                           :noexport:
-* #  --8<-------------------------- separator ------------------------>8-- :noexport:
-* TODO [#A] try admission controller                               :noexport:
-* HALF Accessing Kubernetes API from pods                          :noexport:
+* #  --8<-------------------------- separator ------------------------>8-- 
+* TODO [#A] play with k8s ingress service                          
+* TODO Vanilla CNCF Certified Kubernetes                           
+* #  --8<-------------------------- separator ------------------------>8-- 
+* TODO [#A] try admission controller                               
+* HALF Accessing Kubernetes API from pods                          
  curl -k -v --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt -H "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" https://<mycluster>
-* TODO k8s trainning course from linux foundation: https://training.linuxfoundation.org/training/introduction-to-kubernetes/ :noexport:
-* #  --8<-------------------------- separator ------------------------>8-- :noexport:
-* TODO consolidate: https://codefresh.io/kubernetes-tutorial/page/4/ :noexport:
-* TODO consolidate: https://info.shadow-soft.com/hubfs/Kubernetes-Cheatsheet-Mesosphere.pdf :noexport:
-* TODO consolidate: https://kapeli.com/cheat_sheets/Kubernetes.docset/Contents/Resources/Documents/index :noexport:
-* TODO consolidate: https://lzone.de/cheat-sheet/kubernetes        :noexport:
-* TODO consolidate: http://www.productiondown.com/devops/2018/08/02/Kubernetes-Commands-Cheatsheet.html :noexport:
-* TODO consolidate cheatsheet: https://github.com/LeCoupa/awesome-cheatsheets/blob/master/tools/kubernetes.sh :noexport:
-* TODO consolidate: http://kubernetesbyexample.com/                :noexport:
-* TODO consolidate https://jimmysong.io/cheatsheets/kubernetes-tricks :noexport:
-* #  --8<-------------------------- separator ------------------------>8-- :noexport:
-* HALF use kubectl to pull docker images, instead of ssh to vm     :noexport:
-* HALF use kubectl to cleanup docker images, instead of ssh to vm  :noexport:
+* TODO k8s trainning course from linux foundation: https://training.linuxfoundation.org/training/introduction-to-kubernetes/ 
+* #  --8<-------------------------- separator ------------------------>8-- 
+* TODO consolidate: https://codefresh.io/kubernetes-tutorial/page/4/ 
+* TODO consolidate: https://info.shadow-soft.com/hubfs/Kubernetes-Cheatsheet-Mesosphere.pdf 
+* TODO consolidate: https://kapeli.com/cheat_sheets/Kubernetes.docset/Contents/Resources/Documents/index 
+* TODO consolidate: https://lzone.de/cheat-sheet/kubernetes        
+* TODO consolidate: http://www.productiondown.com/devops/2018/08/02/Kubernetes-Commands-Cheatsheet.html 
+* TODO consolidate cheatsheet: https://github.com/LeCoupa/awesome-cheatsheets/blob/master/tools/kubernetes.sh 
+* TODO consolidate: http://kubernetesbyexample.com/                
+* TODO consolidate https://jimmysong.io/cheatsheets/kubernetes-tricks 
+* #  --8<-------------------------- separator ------------------------>8-- 
+* HALF use kubectl to pull docker images, instead of ssh to vm     
+* HALF use kubectl to cleanup docker images, instead of ssh to vm  
 https://github.com/onfido/k8s-cleanup/blob/master/docker-clean.yml
-* #  --8<-------------------------- separator ------------------------>8-- :noexport:
-* TODO pv termination hangs there forever                          :noexport:
+* #  --8<-------------------------- separator ------------------------>8-- 
+* TODO pv termination hangs there forever                          
 #+BEGIN_EXAMPLE
    /Users/zdenny/git_code/codecommit/devops_blog/k8s  kubectl get pv                                                                                                                                                  master ✘ ✹  ✔ 0
 NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS        CLAIM                           STORAGECLASS   REASON    AGE
@@ -1609,7 +1609,7 @@ db-pv-volume                               400Gi      RWO            Retain     
 pvc-bbddb940-5f43-11e9-ba3c-42010a800085   1Gi        RWO            Delete           Bound         denny-websites/cdn-pv-claim     standard                 12h
 website-pv-volume                          10Gi       RWO            Retain           Terminating   denny-websites/mysql-pv-claim   standard                 12h
 #+END_EXAMPLE
-* TODO k8s configmap can't be changed                              :noexport:
+* TODO k8s configmap can't be changed                              
 #+BEGIN_EXAMPLE
    /Users/zdenny/git_code/codecommit/devops_blog/k8s  kubectl logs -n denny-websites pod/nginx-b88c67f77-dkw64                                                                                                    master ✘ ✖ ✹ ✭  ✔ 0
 Update /etc/nginx/conf.d/default.conf
@@ -1617,14 +1617,14 @@ Update /etc/nginx/conf.d/default.conf
 + sed -i s/http_port_here/80/g /etc/nginx/conf.d/default.conf
 sed: cannot rename /etc/nginx/conf.d/sedz2uuPB: Device or resource busy
 #+END_EXAMPLE
-* TODO [#A] k8s mount configmap file, then edit it when process boostrap :noexport:
-* TODO gce disk: how and when the filesystem formating happens?    :noexport:
-* #  --8<-------------------------- separator ------------------------>8-- :noexport:
-* TODO k8s pod share volume within containers                      :noexport:
-* TODO gce use one disk in a small chunks                          :noexport:
-* TODO k8s mount jenkins home volume, then dockerfile copy/jenkins groovy. How to align? :noexport:
+* TODO [#A] k8s mount configmap file, then edit it when process boostrap 
+* TODO gce disk: how and when the filesystem formating happens?    
+* #  --8<-------------------------- separator ------------------------>8-- 
+* TODO k8s pod share volume within containers                      
+* TODO gce use one disk in a small chunks                          
+* TODO k8s mount jenkins home volume, then dockerfile copy/jenkins groovy. How to align? 
 COPY resources/jobs/ /usr/share/jenkins/ref/jobs/
-* #  --8<-------------------------- separator ------------------------>8-- :noexport:
-* TODO k8s: when jenkins pod gets recreated, jenkins secret parameters need to be reconfigured :noexport:
-* TODO k8s: instruct application to run a clean shutdown or a safe restart :noexport:
+* #  --8<-------------------------- separator ------------------------>8-- 
+* TODO k8s: when jenkins pod gets recreated, jenkins secret parameters need to be reconfigured 
+* TODO k8s: instruct application to run a clean shutdown or a safe restart 
 https://support.cloudbees.com/hc/en-us/articles/115003926511-Best-Practices-for-Jenkins-Updates-Patches-and-Maintenance
