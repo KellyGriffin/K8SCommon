@@ -19,7 +19,7 @@
 | Open a bash terminal in a pod        | =kubectl exec -it <pod> -n <namespace> sh=                                                    |
 | Check pod environment variables      | =kubectl exec <pod> -n <namespace> env=                                            |
 | Get pods sorted by restart count     | =kubectl get pods --sort-by='.status.containerStatuses[0].restartCount' --all-namespaces     =      |
-| List all container images            | =kubectl get pods --all-namespaces -o jsonpath="{..image}" | tr -s '[[:space:]]' '\n'| sort | uniq -d
+| List all container images            | "kubectl get pods --all-namespaces -o jsonpath="{..image}" | tr -s '[[:space:]]' '\n'| sort | uniq -d"
 
 ** Check Performance
 | Name                                         | Command                                              |
